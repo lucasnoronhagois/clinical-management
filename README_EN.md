@@ -260,12 +260,13 @@ This project is under the ISC license. See the `LICENSE` file for more details.
 ## 👨‍💻 Author
 
 Developed to demonstrate full-stack development skills with Node.js, React, and MySQL.
-📧 lucas.noronha.gois@gmail.com
+## 📧 lucas.noronha.gois@gmail.com
 
 ## 📞 Support
 
 For questions or support, contact through the channels available in the developer's profile.
-📧 lucas.noronha.gois@gmail.com
+
+## 📧 lucas.noronha.gois@gmail.com
 
 ---
 
