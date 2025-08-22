@@ -265,7 +265,7 @@ Desenvolvido para demonstrar habilidades em desenvolvimento full-stack com Node.
 ## 📞 Suporte
 
 Para dúvidas ou suporte, entre em contato através dos canais disponibilizados no perfil do desenvolvedor.
-
+📧 lucas.noronha.gois@gmail.com
 ---
 
 **📖 English Version**: [README_EN.md](README_EN.md)
