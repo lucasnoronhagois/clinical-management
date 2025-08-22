@@ -1,0 +1,86 @@
+/* aplicar transparência apenas em elementos específicos, não em todos os divs */
+#root, .App {
+  background: transparent !important;
+}
+
+/* cards e containers principais - fundo sólido */
+.card, .container, main, section {
+  background: #f8f9fa !important; /* Branco-gelo */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+body {
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  background: #f8f9fa !important; /* Branco-gelo */
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* estilo específico para cards do Dashboard */
+.dashboard-card {
+  background: #f8f9fa !important;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  border-radius: 8px;
+}
+
+/* Container do Dashboard */
+.dashboard-container {
+  background: transparent !important;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Animação para flash messages */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.flash-message {
+  animation: slideDown 0.3s ease-out;
+}
