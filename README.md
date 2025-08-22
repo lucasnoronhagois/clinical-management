@@ -259,7 +259,8 @@ Este projeto está sob a licença ISC. Veja o arquivo `LICENSE` para mais detalh
 
 ## 👨‍💻 Autor
 
-Desenvolvido com ❤️ para demonstrar habilidades em desenvolvimento full-stack com Node.js, React e MySQL.
+Desenvolvido para demonstrar habilidades em desenvolvimento full-stack com Node.js, React e MySQL.
+📧 lucas.noronha.gois@gmail.com
 
 ## 📞 Suporte
 
