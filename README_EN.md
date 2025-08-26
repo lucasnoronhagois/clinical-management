@@ -2,7 +2,17 @@
 
 ## 📋 Description
 
-**ClinicalCare** is a comprehensive medical appointment management system developed with modern architecture, offering a robust solution for clinics and hospitals to efficiently and securely manage patients, appointments, users, and reports.
+**ClinicalCare** is a comprehensive medical appointment management system developed with **TypeScript**, React (Frontend) and Node.js/Express (Backend), offering a robust solution for clinics and hospitals to efficiently and securely manage patients, appointments, users, and reports.
+
+## 🚀 TypeScript Migration
+
+This project has been fully migrated to TypeScript to provide:
+
+- **Type Safety**: Compile-time error detection
+- **Better IntelliSense**: More accurate autocomplete
+- **Safe Refactoring**: Safer code changes
+- **Living Documentation**: Types serve as documentation
+- **Better Maintainability**: More readable and organized code
 
 ## 🚀 Key Features
 
@@ -56,6 +66,7 @@
 ### Backend
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework
+- **TypeScript** - Type-safe JavaScript
 - **Sequelize** - Database ORM
 - **MySQL** - Relational database
 - **JWT** - Authentication and authorization
@@ -66,6 +77,7 @@
 
 ### Frontend
 - **React 19** - JavaScript library for interfaces
+- **TypeScript** - Type-safe JavaScript
 - **React Router DOM** - Routing
 - **Axios** - HTTP client
 - **Bootstrap 5** - CSS framework
@@ -81,22 +93,28 @@
 ## 📁 Project Structure
 
 ```
-clinical-care/
-├── backend/
-│   ├── config/           # Database and route configurations
-│   ├── controllers/      # Application controllers
-│   ├── middlewares/      # Authentication and validation middlewares
-│   ├── models/          # Sequelize models
-│   ├── routes/          # API route definitions
-│   ├── schema/          # Validation schemas (Yup)
-│   ├── services/        # Business logic
-│   └── utils/           # Utilities
-├── frontend/
+clinical-management/
+├── backend/                 # API Node.js + Express + TypeScript
 │   ├── src/
-│   │   ├── components/  # Reusable React components
-│   │   ├── pages/       # Application pages
-│   │   └── utils/       # Frontend utilities
-│   └── public/          # Static files
+│   │   ├── config/         # Database and route configurations
+│   │   ├── controllers/    # Application controllers
+│   │   ├── middlewares/    # Authentication and validation middlewares
+│   │   ├── models/         # Sequelize models with TypeScript
+│   │   ├── routes/         # API route definitions
+│   │   ├── services/       # Business logic
+│   │   ├── schema/         # Validation schemas (Yup)
+│   │   └── utils/          # Utilities
+│   ├── tsconfig.json       # TypeScript configuration
+│   └── package.json
+├── frontend/               # React + TypeScript application
+│   ├── src/
+│   │   ├── components/     # Reusable React components
+│   │   ├── pages/          # Application pages
+│   │   ├── types/          # TypeScript type definitions
+│   │   └── utils/          # Frontend utilities
+│   ├── tsconfig.json       # TypeScript configuration
+│   └── package.json
+└── README.md
 ```
 
 ## 🗄️ Data Model
@@ -127,7 +145,7 @@ clinical-care/
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
-cd clinical-care/backend
+cd clinical-management/backend
 ```
 
 2. **Install dependencies**
@@ -156,7 +174,8 @@ CREATE DATABASE clinical_care_db;
 npm run dev
 
 # Production
-npm start
+npm run build:secure  # Compile, minify and obfuscate
+npm start            # Run the compiled server
 ```
 
 ### Frontend
@@ -179,6 +198,19 @@ The frontend is already configured to proxy requests to `http://localhost:3000`
 npm run dev
 ```
 
+## 📝 Available Scripts
+
+### Backend
+- `npm run dev`: Runs the server in development mode with hot reload
+- `npm run build`: Compiles TypeScript to JavaScript
+- `npm run build:secure`: Compiles, minifies and obfuscates code for production
+- `npm start`: Runs the compiled server
+
+### Frontend
+- `npm run dev`: Runs the development server
+- `npm run build`: Builds the project for production
+- `npm run lint`: Runs TypeScript/ESLint linter
+
 ## 🚀 How to Use
 
 1. **Access the application** at `http://localhost:5173`
@@ -200,6 +232,24 @@ npm run dev
 - **CORS protection** configured
 - **Authentication middleware** on all protected routes
 - **Input data sanitization**
+- **Code minification** for production optimization
+- **Code obfuscation** against reverse engineering
+- **Conditional logging** only in development
+
+## 🛡️ Secure Build for Production
+
+### **npm run build:secure**
+This command executes a complete code protection process:
+
+1. **TypeScript Compilation** → JavaScript
+2. **Minification** → Reduces code size
+3. **Obfuscation** → Protects against reverse engineering
+
+### **Result:**
+- ✅ **41 files** processed
+- ✅ **Optimized code** for production
+- ✅ **Complete protection** against code analysis
+- ✅ **Logs removed** automatically
 
 ## 📈 Performance
 
@@ -220,30 +270,109 @@ The project is prepared for test implementation:
 
 ### Main Endpoints
 
-#### Authentication
-- `POST /api/auth/login` - User login
-- `POST /api/auth/register` - User registration
+#### Authentication (`/api/auth`)
+- `POST /login` - User login
+- `POST /register` - User registration (admin only)
+- `POST /change-password` - Change password
+- `POST /reset-password` - Reset password
 
-#### Companies
-- `GET /api/companies` - List companies
-- `POST /api/companies` - Create company
-- `PUT /api/companies/:id` - Update company
-- `DELETE /api/companies/:id` - Delete company
+#### Companies (`/api/companies`)
+- `GET /` - List companies
+- `GET /:id` - Get company
+- `POST /` - Create company
+- `PUT /:id` - Update company
+- `DELETE /:id` - Delete company
 
-#### Patients
-- `GET /api/patients` - List patients
-- `POST /api/patients` - Create patient
-- `PUT /api/patients/:id` - Update patient
-- `DELETE /api/patients/:id` - Delete patient
+#### Patients (`/api/patients`)
+- `GET /` - List patients
+- `GET /:id` - Get patient
+- `POST /` - Create patient
+- `PUT /:id` - Update patient
+- `DELETE /:id` - Delete patient
 
-#### Appointments
-- `GET /api/attendances` - List appointments
-- `POST /api/attendances` - Create appointment
-- `PUT /api/attendances/:id` - Update appointment
-- `DELETE /api/attendances/:id` - Delete appointment
+#### Places (`/api/places`)
+- `GET /` - List places
+- `GET /:id` - Get place
+- `POST /` - Create place
+- `PUT /:id` - Update place
+- `DELETE /:id` - Delete place
 
-#### Dashboard
-- `GET /api/dashboard` - Dashboard statistics
+#### Appointments (`/api/attendances`)
+- `GET /` - List appointments
+- `GET /:id` - Get appointment
+- `POST /` - Create appointment
+- `PUT /:id` - Update appointment
+- `PUT /:id/confirm` - Confirm appointment
+- `PUT /:id/finish` - Finish appointment
+- `DELETE /:id` - Delete appointment
+
+#### Users (`/api/users`)
+- `GET /` - List users
+- `GET /:id` - Get user
+- `POST /` - Create user
+- `PUT /:id` - Update user
+- `DELETE /:id` - Delete user
+
+#### Dashboard (`/api/dashboard`)
+- `GET /statistics` - Dashboard statistics
+
+#### Reports (`/api/reports`)
+- `GET /attendances` - Attendance reports by professional
+
+## ✅ Implemented Features
+
+### Backend (100% TypeScript)
+- **Authentication**: Login, registration, password change, password reset
+- **Users**: Complete CRUD with validation
+- **Companies**: Complete CRUD with validation
+- **Patients**: Complete CRUD with validation
+- **Places**: Complete CRUD with validation
+- **Appointments**: Complete CRUD with validation
+- **Dashboard**: Real-time statistics
+- **Reports**: Professional attendance reports
+
+### Frontend (100% TypeScript)
+- **Authentication**: Login and logout
+- **Company Selection**: Interface to choose company
+- **Dashboard**: Statistics visualization
+- **Patient Management**: Complete CRUD
+- **Appointment Management**: Complete CRUD
+- **User Management**: Complete CRUD (admin only)
+- **Company Management**: Complete CRUD (admin only)
+- **Place Management**: Complete CRUD
+- **Reports**: Report visualization
+
+### Yup Validation (100% Implemented)
+- **loginSchema**: Login validation
+- **userSchema**: User validation
+- **changePasswordSchema**: Password change validation
+- **resetPasswordSchema**: Password reset validation
+- **patientSchema**: Patient validation
+- **companySchema**: Company validation
+- **placeSchema**: Place validation
+- **attendanceSchema**: Appointment validation
+
+## 🔄 Project Status
+
+### ✅ Completed
+- [x] Complete TypeScript migration
+- [x] Yup validation in all routes
+- [x] JWT authentication implemented
+- [x] Complete CRUD for all entities
+- [x] Functional dashboard
+- [x] Reporting system
+- [x] Responsive interface
+- [x] Security middlewares
+- [x] Code minification and obfuscation
+- [x] Conditional logging by environment
+
+### 🚧 Next Steps
+- [ ] Unit tests with Jest
+- [ ] Integration tests
+- [ ] API documentation with Swagger
+- [ ] Redis caching
+- [ ] Performance monitoring
+- [ ] Automated deployment
 
 ## 🤝 Contributing
 
@@ -259,17 +388,18 @@ This project is under the ISC license. See the `LICENSE` file for more details.
 
 ## 👨‍💻 Author
 
-Developed to demonstrate full-stack development skills with Node.js, React, and MySQL.
-## 📧 lucas.noronha.gois@gmail.com
+Developed to demonstrate full-stack development skills with Node.js, React, TypeScript, and MySQL.
+
+## 📧 Contact
+
+**lucas.noronha.gois@gmail.com**
 
 ## 📞 Support
 
 For questions or support, contact through the channels available in the developer's profile.
 
-## 📧 lucas.noronha.gois@gmail.com
-
 ---
 
-**📖 Versão em Português**: [README.md](README.md)
+**📖 Portuguese Version**: [README.md](README.md)
 
-**ClinicalCare** - Transforming medical appointment management with modern technology and efficiency.
+**ClinicalCare** - Transforming medical appointment management with modern technology, TypeScript, and efficiency.

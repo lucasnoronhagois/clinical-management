@@ -42,7 +42,7 @@ function Dashboard() {
       params.append('start_date', oneYearAgo.toISOString().split('T')[0]);
       params.append('end_date', new Date().toISOString().split('T')[0]);
 
-      const res = await axios.get(`/api/dashboard?${params}`, {
+      const res = await axios.get(`/api/dashboard/statistics?${params}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -55,7 +55,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    if (allData && !filteredStatistics) {
+    if (allData && allData.details && !filteredStatistics) {
       applyQuickFilter('month');
     }
   }, [allData]);
@@ -115,7 +115,7 @@ function Dashboard() {
   };
 
   const getPeriodLabel = () => {
-    if (!filteredStatistics) return '';
+    if (!filteredStatistics || !filteredStatistics.period) return '';
     const start = new Date(filteredStatistics.period.start_date);
     const end = new Date(filteredStatistics.period.end_date);
 
@@ -135,7 +135,7 @@ function Dashboard() {
 
   // função para filtrar dados localmente
   const filterDataByDateRange = (startDate, endDate) => {
-    if (!allData) return;
+    if (!allData || !allData.details) return;
 
     const start = startDate ? new Date(startDate + 'T00:00:00') : null;
     const end = endDate ? new Date(endDate + 'T23:59:59') : null;
@@ -169,8 +169,28 @@ function Dashboard() {
     const totalPatients = Object.values(filteredPatients).reduce((sum, count) => sum + count, 0);
 
     // período do filtro usando as datas fornecidas
-    const filterStartDate = startDate ? new Date(startDate + 'T00:00:00') : new Date();
-    const filterEndDate = endDate ? new Date(endDate + 'T23:59:59') : new Date();
+    // Se não há datas, usar um período que inclui todos os dados
+    let filterStartDate, filterEndDate;
+    if (startDate && endDate) {
+      filterStartDate = new Date(startDate + 'T00:00:00');
+      filterEndDate = new Date(endDate + 'T23:59:59');
+    } else {
+      // Se não há datas, usar um período amplo que inclui todos os dados
+      const allDates = [
+        ...Object.keys(allData.details.attendances_by_day || {}),
+        ...Object.keys(allData.details.patients_by_day || {})
+      ];
+      
+      if (allDates.length > 0) {
+        const sortedDates = allDates.sort();
+        filterStartDate = new Date(sortedDates[0] + 'T00:00:00');
+        filterEndDate = new Date(sortedDates[sortedDates.length - 1] + 'T23:59:59');
+      } else {
+        // Se não há dados, usar a data atual
+        filterStartDate = new Date();
+        filterEndDate = new Date();
+      }
+    }
 
     setFilteredStatistics({
       period: {
@@ -335,7 +355,10 @@ function Dashboard() {
                 <Button variant="secondary" onClick={() => {
                   setDateRange({ start_date: '', end_date: '' });
                   setActiveQuickFilter('');
-                  setFilteredStatistics(allData); // reset para todos os dados
+                  // Reset para todos os dados sem filtro de data
+                  if (allData) {
+                    filterDataByDateRange('', '');
+                  }
                 }}>
                   Limpar
                 </Button>
@@ -378,7 +401,7 @@ function Dashboard() {
             <Card className="text-center dashboard-card">
               <Card.Body>
                 <Card.Title>Total de Atendimentos</Card.Title>
-                <h2 style={{ color: '#007bff' }}>{filteredStatistics.statistics.total_attendances}</h2>
+                <h2 style={{ color: '#007bff' }}>{filteredStatistics.statistics?.total_attendances || 0}</h2>
                 <small className="text-muted">Período: {getPeriodLabel()}</small>
               </Card.Body>
             </Card>
@@ -387,7 +410,7 @@ function Dashboard() {
             <Card className="text-center dashboard-card">
               <Card.Body>
                 <Card.Title>Novos Pacientes</Card.Title>
-                <h2 style={{ color: '#28a745' }}>{filteredStatistics.statistics.total_patients}</h2>
+                <h2 style={{ color: '#28a745' }}>{filteredStatistics.statistics?.total_patients || 0}</h2>
                 <small className="text-muted">Período: {getPeriodLabel()}</small>
               </Card.Body>
             </Card>

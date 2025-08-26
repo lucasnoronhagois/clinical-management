@@ -9,8 +9,5 @@ frontend/node_modules/
 backend/.env
 frontend/.env
 
-# camus
-camus.js
-
 #dist
 dist/

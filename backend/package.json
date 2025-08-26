@@ -2,19 +2,25 @@
   "name": "backend",
   "version": "1.0.0",
   
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "svbabel": "node dist/server.js",
-    "build": "babel . --out-dir dist --ignore node_modules,dist", 
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "build:dev": "tsc --project tsconfig.dev.json",
+    "build:minify": "tsc && npm run minify",
+    "build:watch": "tsc --watch",
+    "minify": "node minify.js",
+    "obfuscate": "javascript-obfuscator dist --output dist --config obfuscator.config.js",
+    "build:secure": "npm run build && npm run minify && npm run obfuscate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "backend",
     "api",
     "express",
-    "sequelize"
+    "sequelize",
+    "typescript"
   ],
   "author": "",
   "license": "ISC",
@@ -30,8 +36,14 @@
     "yup": "^1.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.3",
-    "@babel/preset-env": "^7.28.3"
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.11.0",
+    "javascript-obfuscator": "^4.1.0",
+    "terser": "^5.28.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
   }
 }

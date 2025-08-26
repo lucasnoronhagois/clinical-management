@@ -42,7 +42,9 @@ function Patients() {
     }
     
     setLoading(true);
-    axios.get(`/api/patients?company_id=${selectedCompanyId}`, {
+    
+    // Buscar pacientes
+    axios.get(`http://localhost:3000/api/patients?company_id=${selectedCompanyId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => {
@@ -57,6 +59,19 @@ function Patients() {
       .catch((err) => {
         setError('Erro ao buscar pacientes');
         setLoading(false);
+      });
+    
+    // Buscar empresas para o select
+    axios.get('http://localhost:3000/api/companies', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(res => {
+        if (res.data && Array.isArray(res.data)) {
+          setCompanies(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error('Erro ao buscar empresas:', err);
       });
   }, [navigate]);
 
@@ -108,7 +123,7 @@ function Patients() {
       const token = localStorage.getItem('token');
       const selectedCompanyId = localStorage.getItem('selectedCompanyId');
       
-      const res = await axios.get(`/api/patients?company_id=${selectedCompanyId}`, {
+      const res = await axios.get(`http://localhost:3000/api/patients?company_id=${selectedCompanyId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -129,7 +144,7 @@ function Patients() {
     if (showCreateModal || showEditModal) {
       const token = localStorage.getItem('token');
       if (token) {
-        axios.get('/api/companies', { headers: { Authorization: `Bearer ${token}` } })
+        axios.get('http://localhost:3000/api/companies', { headers: { Authorization: `Bearer ${token}` } })
           .then(res => {
             const sorted = (res.data || []).sort((a, b) => a.name.localeCompare(b.name));
             setCompanies(sorted);
@@ -151,7 +166,7 @@ function Patients() {
   const handleShowEdit = async (patientId) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(`/api/patients/${patientId}`, { 
+      const res = await axios.get(`http://localhost:3000/api/patients/${patientId}`, { 
         headers: { Authorization: `Bearer ${token}` } 
       });
       
@@ -193,16 +208,18 @@ function Patients() {
       const token = localStorage.getItem('token');
       const selectedCompanyId = localStorage.getItem('selectedCompanyId');
       const isEditing = showEditModal;
-      const url = isEditing ? `/api/patients/${formData.id}` : '/api/patients';
+      const endpoint = isEditing ? `/api/patients/${formData.id}` : '/api/patients';
       const method = isEditing ? 'put' : 'post';
       
       // garantir que o company_id está sendo enviado mesmo que não apareça em tela
       const dataToSend = {
         ...formData,
-        company_id: formData.company_id || selectedCompanyId
+        company_id: parseInt(formData.company_id || selectedCompanyId)
       };
       
-      await axios[method](url, dataToSend, { 
+      console.log('Dados sendo enviados:', dataToSend);
+      
+      await axios[method](`http://localhost:3000${endpoint}`, dataToSend, { 
         headers: { Authorization: `Bearer ${token}` } 
       });
       
@@ -210,14 +227,24 @@ function Patients() {
       setShowEditModal(false);
       fetchAllPatients();
     } catch (err) {
-      setError('Erro ao salvar paciente.');
+      console.error('Erro detalhado:', err.response?.data || err);
+      if (err.response?.data?.details) {
+        const errorDetails = err.response.data.details.map((detail) => 
+          `${detail.field}: ${detail.message}`
+        ).join(', ');
+        setError(`Erro de validação: ${errorDetails}`);
+      } else if (err.response?.data?.error) {
+        setError(`Erro: ${err.response.data.error}`);
+      } else {
+        setError('Erro ao salvar paciente.');
+      }
     }
   };
 
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/patients/${deletePatientId}`, { 
+      await axios.delete(`http://localhost:3000/api/patients/${deletePatientId}`, { 
         headers: { Authorization: `Bearer ${token}` } 
       });
       setShowDeleteModal(false);
