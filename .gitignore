@@ -1,13 +1,138 @@
-# modules
+# Dependencies
 node_modules/
-backend/node_modules/
-backend-copy/node_modules/
-frontend/node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Variáveis de ambiente
+# Build output
+dist/
+build/
+*/dist/
+*/build/
+*.tsbuildinfo
+
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.test
+.env.*
+!.env.example
 backend/.env
 frontend/.env
 
-#dist
-dist/
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*/coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Jest coverage
+.jest/
+test-results/
+playwright-report/
+test-results.xml
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+.cache/
+.parcel-cache/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+*.tar.gz
+
+# Yarn Integrity file
+.yarn-integrity
+.yarnrc
+
+# dotenv environment variables file
+# (already covered above)
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+.atom/
+.brackets.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Test artifacts
+test-*.js
+debug-*.js
+*.test.js
+*.spec.js
+
+# Backup and temporary files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Configuration files (sensitive)
+config.json
+secrets.json
+credentials.json
+
+# Frontend specific
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/.cache/
+frontend/coverage/
+
+# Backend specific
+backend/dist/
+backend/build/
+backend/logs/
+backend/uploads/
+backend/temp/
+backend/coverage/
+
+# Database
+*.sqlite
+*.db
+*.sql
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+Dockerfile.dev
+
+# Temporary files
+temp/
+tmp/

@@ -9,12 +9,12 @@ Crie um arquivo `.env` na raiz do backend com as seguintes variáveis:
 DB_HOST=localhost
 DB_USER=your_username
 DB_PASS=your_password
-DB_NAME=clinical_care_db
+DB_NAME=your_dbname
 ```
 
 ### **Segurança**
 ```env
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+JWT_SECRET=suasenhasupersecretaaqui
 ```
 
 ### **Ambiente**
@@ -27,6 +27,13 @@ PORT=3000
 ```env
 CORS_ORIGIN=http://localhost:5173
 ```
+
+### **URLs da Aplicação**
+```env
+backend_url=http://localhost:3000/
+```
+
+**Nota:** A variável `backend_url` é utilizada para configurar a URL base da API. Em desenvolvimento, geralmente aponta para `localhost:3000`, enquanto em produção deve apontar para o domínio real da aplicação.
 
 ## 🚀 Ambientes Disponíveis
 
@@ -54,6 +61,7 @@ DB_NAME=clinical_care_dev
 JWT_SECRET=dev_secret_key
 PORT=3000
 CORS_ORIGIN=http://localhost:5173
+backend_url=http://localhost:3000/
 
 # Produção
 NODE_ENV=production
@@ -64,6 +72,7 @@ DB_NAME=clinical_care_prod
 JWT_SECRET=super_secure_production_key
 PORT=3000
 CORS_ORIGIN=https://yourdomain.com
+backend_url=https://yourdomain.com/
 ```
 
 ## 🔒 Segurança

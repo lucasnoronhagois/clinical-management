@@ -216,6 +216,15 @@ A aplicação estará rodando em `http://localhost:5173`
 - `npm run build`: Compila o projeto para produção
 - `npm run lint`: Executa o linter TypeScript/ESLint
 
+## 🔧 Configuração de Ambiente
+
+Para configurar as variáveis de ambiente, consulte o arquivo **[ENV.md](backend/ENV.md)** que contém todas as variáveis necessárias, incluindo:
+- Configuração do banco de dados
+- Chaves JWT
+- URLs da aplicação (`backend_url`)
+- Configurações de CORS
+- Ambientes de desenvolvimento e produção
+
 ## 🚀 Como Usar
 
 1. **Acesse a aplicação** em `http://localhost:5173`
