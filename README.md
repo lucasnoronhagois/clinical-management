@@ -88,6 +88,52 @@ clinical-management/
 └── README.md
 ```
 
+## 🧪 Testes Unitários
+
+O projeto possui uma **solução completa de testes unitários** implementada com Jest e TypeScript, garantindo a qualidade e confiabilidade do código:
+
+### ✅ Cobertura de Testes
+- **8 Services testados** com 100% de cobertura
+- **115 testes** implementados e funcionando
+- **Métodos testados**: `find`, `list`, `create`, `update`, `delete`, `createMultiple`
+- **Cenários específicos**: autenticação, validações, tratamento de erros
+
+### 🎯 Services Testados
+- **UserService** - Gestão de usuários
+- **PatientService** - Gestão de pacientes  
+- **CompanyService** - Gestão de empresas
+- **PlaceService** - Gestão de locais
+- **AttendanceService** - Gestão de consultas
+- **AuthService** - Autenticação e autorização
+- **DashboardService** - Estatísticas e relatórios
+- **ReportService** - Geração de relatórios
+
+### 🚀 Comandos de Teste
+```bash
+# Executar todos os testes
+npm test
+
+# Executar testes com cobertura
+npm run test:coverage
+
+# Executar testes em modo watch
+npm run test:watch
+
+# Executar testes específicos
+npm test -- --testPathPattern="userService"
+```
+
+### 📊 Benefícios dos Testes
+- **Qualidade do Código**: Garantia de funcionamento correto
+- **Refatoração Segura**: Mudanças com confiança
+- **Documentação Viva**: Testes como documentação
+- **Detecção de Bugs**: Identificação rápida de problemas
+- **Desenvolvimento Confiável**: Base sólida para evolução
+
+### 📚 Documentação Detalhada
+- **[SETUP_TESTS.md](backend/SETUP_TESTS.md)**: Guia de configuração e execução
+- **[TESTING.md](backend/TESTING.md)**: Documentação completa e conceitos
+
 ## 🗄️ Modelo de Dados
 
 ### Entidades Principais

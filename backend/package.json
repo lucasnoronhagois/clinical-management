@@ -13,7 +13,10 @@
     "minify": "node minify.js",
     "obfuscate": "javascript-obfuscator dist --output dist --config obfuscator.config.js",
     "build:secure": "npm run build && npm run minify && npm run obfuscate",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose"
   },
   "keywords": [
     "backend",
@@ -39,10 +42,13 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.11.0",
     "javascript-obfuscator": "^4.1.0",
+    "jest": "^29.5.0",
     "terser": "^5.28.1",
+    "ts-jest": "^29.1.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }

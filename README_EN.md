@@ -90,6 +90,52 @@ This project has been fully migrated to TypeScript to provide:
 - **Middleware pattern** for authentication and validation
 - **RESTful API** with standardized endpoints
 
+## 🧪 Unit Testing
+
+The project features a **complete unit testing solution** implemented with Jest and TypeScript, ensuring code quality and reliability:
+
+### ✅ Test Coverage
+- **8 Services tested** with 100% coverage
+- **115 tests** implemented and working
+- **Tested methods**: `find`, `list`, `create`, `update`, `delete`, `createMultiple`
+- **Specific scenarios**: authentication, validations, error handling
+
+### 🎯 Tested Services
+- **UserService** - User management
+- **PatientService** - Patient management  
+- **CompanyService** - Company management
+- **PlaceService** - Location management
+- **AttendanceService** - Appointment management
+- **AuthService** - Authentication and authorization
+- **DashboardService** - Statistics and reports
+- **ReportService** - Report generation
+
+### 🚀 Test Commands
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run specific tests
+npm test -- --testPathPattern="userService"
+```
+
+### 📊 Testing Benefits
+- **Code Quality**: Guarantee of correct operation
+- **Safe Refactoring**: Changes with confidence
+- **Living Documentation**: Tests as documentation
+- **Bug Detection**: Quick problem identification
+- **Reliable Development**: Solid foundation for evolution
+
+### 📚 Detailed Documentation
+- **[SETUP_TESTS.md](backend/SETUP_TESTS.md)**: Setup and execution guide
+- **[TESTING.md](backend/TESTING.md)**: Complete documentation and concepts
+
 ## 📁 Project Structure
 
 ```
