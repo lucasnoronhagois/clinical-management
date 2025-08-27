@@ -1,6 +1,55 @@
-# Clinical Management System
+# 🏥 ClinicalCare - Sistema de Gerenciamento de Consultas Médicas
 
-Sistema de gerenciamento clínico desenvolvido com **TypeScript**, React (Frontend) e Node.js/Express (Backend).
+## 📋 Descrição
+
+**ClinicalCare** é um sistema abrangente de gerenciamento de consultas médicas desenvolvido com **TypeScript**, React (Frontend) e Node.js/Express (Backend), oferecendo uma solução robusta para clínicas e hospitais gerenciarem de forma eficiente e segura pacientes, consultas, usuários e relatórios.
+
+## 🚀 Funcionalidades Principais
+
+### 🔐 Sistema de Autenticação e Autorização
+- **JWT (JSON Web Tokens)** para autenticação segura
+- **Sistema baseado em roles** com diferentes níveis de acesso
+- **Proteção de rotas** com middleware de autenticação
+- **Validação de dados** com Yup Schema Validation
+- **Criptografia de senhas** com bcrypt
+
+### 🏢 Gestão Multi-Empresa
+- **Suporte para múltiplas empresas** em uma única instância
+- **Seleção de empresa** após login para usuários administradores
+- **Isolamento de dados** por empresa
+- **Gestão completa de informações empresariais**
+
+### 👥 Gestão de Usuários
+- **Registro e edição** de usuários do sistema
+- **Diferentes perfis** (Administrador, Recepcionista, etc.)
+- **Controle de acesso** baseado em roles
+- **Gestão granular de permissões**
+
+### 👨‍⚕️ Gestão de Pacientes
+- **Registro completo de pacientes** com validações
+- **Busca avançada e filtros**
+- **Paginação** para melhor performance
+- **Validação de CPF** e dados pessoais
+- **Vinculação automática** à empresa selecionada
+
+### 📍 Gestão de Locais
+- **Registro de locais de atendimento**
+- **Organização hierárquica** de espaços
+- **Controle de disponibilidade** de locais
+
+### 🏥 Gestão de Consultas
+- **Agendamento de consultas**
+- **Controle de status** (confirmado, pendente, finalizado)
+- **Vinculação paciente-local-profissional**
+- **Histórico completo de consultas**
+- **Filtros avançados** por data, paciente, local
+
+### 📊 Dashboard e Relatórios
+- **Dashboard interativo** com estatísticas em tempo real
+- **Filtros por período** (hoje, semana, mês, ano)
+- **Gráficos de consultas e pacientes**
+- **Relatórios personalizáveis**
+- **Exportação de dados**
 
 ## 🚀 Migração para TypeScript
 
@@ -39,6 +88,22 @@ clinical-management/
 └── README.md
 ```
 
+## 🗄️ Modelo de Dados
+
+### Entidades Principais
+- **Users**: Usuários do sistema com diferentes roles
+- **Companies**: Empresas/clínicas registradas
+- **Patients**: Pacientes vinculados às empresas
+- **Places**: Locais de atendimento
+- **Attendances**: Consultas e atendimentos
+- **Reports**: Relatórios e estatísticas
+
+### Relacionamentos
+- Usuários podem pertencer a uma empresa
+- Pacientes são vinculados a uma empresa
+- Consultas conectam pacientes, locais e usuários
+- Sistema de auditoria com timestamps
+
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend
@@ -58,6 +123,12 @@ clinical-management/
 - **React Bootstrap**
 - **Axios** (HTTP Client)
 - **Vite** (Build Tool)
+
+### Arquitetura
+- **Arquitetura MVC** (Model-View-Controller)
+- **Separação de responsabilidades** (Controllers, Services, Models)
+- **Padrão de middleware** para autenticação e validação
+- **API RESTful** com endpoints padronizados
 
 ## 🚀 Como Executar
 
@@ -99,6 +170,19 @@ A aplicação estará rodando em `http://localhost:5173`
 - `npm run build`: Compila o projeto para produção
 - `npm run lint`: Executa o linter TypeScript/ESLint
 
+## 🚀 Como Usar
+
+1. **Acesse a aplicação** em `http://localhost:5173`
+2. **Faça login** com suas credenciais
+3. **Selecione uma empresa** (se você for administrador)
+4. **Navegue pelos módulos**:
+   - Dashboard: Visualizar estatísticas
+   - Pacientes: Gerenciar cadastros de pacientes
+   - Consultas: Agendar e gerenciar consultas
+   - Locais: Configurar locais de atendimento
+   - Usuários: Gerenciar usuários do sistema
+   - Relatórios: Acessar relatórios personalizados
+
 ## 🔧 Configuração do TypeScript
 
 ### Backend
@@ -123,6 +207,18 @@ A aplicação estará rodando em `http://localhost:5173`
 - **Obfuscação**: Proteção contra engenharia reversa
 - **Logs Condicionais**: Logs apenas em desenvolvimento
 
+## 🔒 Segurança
+
+- **Autenticação JWT** com tokens seguros
+- **Criptografia de senhas** com bcrypt
+- **Validação de entrada** com schemas Yup
+- **Proteção CORS** configurada
+- **Middleware de autenticação** em todas as rotas protegidas
+- **Sanitização de dados** de entrada
+- **Minificação de código** para otimização de produção
+- **Obfuscação de código** contra engenharia reversa
+- **Logs condicionais** apenas em desenvolvimento
+
 ## 🛡️ Build Seguro para Produção
 
 ### **npm run build:secure**
@@ -137,6 +233,21 @@ Este comando executa um processo completo de proteção do código:
 - ✅ **Código otimizado** para produção
 - ✅ **Proteção completa** contra análise de código
 - ✅ **Logs removidos** automaticamente
+
+## 📈 Performance
+
+- **Paginação** implementada em todas as listagens
+- **Filtros otimizados** para busca eficiente
+- **Carregamento lazy** de componentes
+- **Compressão de resposta HTTP**
+- **Cache de dados** frequentes
+
+## 🧪 Testes
+
+O projeto está preparado para implementação de testes:
+- **Testes unitários** com Jest
+- **Testes de integração** para APIs
+- **Testes E2E** com Cypress (estrutura preparada)
 
 ## 📊 Funcionalidades Implementadas
 
@@ -254,6 +365,32 @@ Este comando executa um processo completo de proteção do código:
 - [ ] Monitoramento de performance
 - [ ] Deploy automatizado
 
+## 🤝 Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
 ## 📄 Licença
 
-Este projeto está sob a licença ISC.
+Este projeto está sob a licença ISC. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 👨‍💻 Autor
+
+Desenvolvido para demonstrar habilidades de desenvolvimento full-stack com Node.js, React, TypeScript e MySQL.
+
+## 📧 Contato
+
+**lucas.noronha.gois@gmail.com**
+
+## 📞 Suporte
+
+Para dúvidas ou suporte, entre em contato através dos canais disponíveis no perfil do desenvolvedor.
+
+---
+
+**📖 English Version**: [README_EN.md](README_EN.md)
+
+**ClinicalCare** - Transformando o gerenciamento de consultas médicas com tecnologia moderna, TypeScript e eficiência.
