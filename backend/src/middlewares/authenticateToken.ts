@@ -14,7 +14,7 @@ export function authenticateToken(req: AuthenticatedRequest, res: Response, next
     return;
   }
   
-  const jwtSecret = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this-in-production';
+  const jwtSecret = process.env.JWT_SECRET || 'JWT_KEY';
   jwt.verify(token, jwtSecret, (err, user) => {
     if (err) {
       res.status(403).json({ error: 'Token inválido.' });

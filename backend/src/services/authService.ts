@@ -4,7 +4,7 @@ import { Op } from 'sequelize';
 import { User } from '../models/index';
 
 interface LoginCredentials {
-  login: string;
+  email_or_login: string;
   password: string;
 }
 
@@ -31,10 +31,10 @@ interface TokenPayload {
 
 export default class AuthService {
 
-  async login(credentials: LoginCredentials): Promise<{ token: string }> {
-    const { login, password } = credentials;
+  async login(credentials: LoginCredentials): Promise<{ token: string; user: any }> {
+    const { email_or_login, password } = credentials;
 
-    if (!login || !password) {
+    if (!email_or_login || !password) {
       throw new Error('Email/Login e senha são obrigatórios.');
     }
 
@@ -42,8 +42,8 @@ export default class AuthService {
     let user = await User.findOne({
       where: {
         [Op.or]: [
-          { email: login },
-          { login: login }
+          { email: email_or_login },
+          { login: email_or_login }
         ]
       }
     });
@@ -80,7 +80,9 @@ export default class AuthService {
       { expiresIn: '8h' }
     );
 
-    return { token };
+    // Retornar token e dados do usuário (sem senha)
+    const userResponse = { ...user.get(), password: undefined };
+    return { token, user: userResponse };
   }
 
   async register(userData: UserData): Promise<any> {

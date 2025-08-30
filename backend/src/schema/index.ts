@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 // Schemas temporários - serão implementados conforme necessário
 export const loginSchema = yup.object({
-  login: yup.string().required('Login é obrigatório'),
+  email_or_login: yup.string().required('Email ou Login é obrigatório'),
   password: yup.string().required('Senha é obrigatória')
 });
 
